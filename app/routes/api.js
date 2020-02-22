@@ -1,4 +1,4 @@
-var fs = require('fs');
+const {calculateSum} = require('../services/calc-sum');
 
 module.exports = (express) => {
 
@@ -6,9 +6,7 @@ module.exports = (express) => {
 
     api.get('/*/sum', (req, res) => {
         const url = req.url;
-        const file = fs.readFileSync('access.log', {encoding: 'utf-8'});
-        console.log(file.split(/\r?\n/));
-
+        calculateSum(url);
         res.send(`get sum ${url}`);
     });
 

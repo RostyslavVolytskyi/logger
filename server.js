@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 
 var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
 morgan.token('body', (req, res, param) => JSON.stringify(req.body));
-app.use(morgan('[:date[clf]] :method :url :body', { stream: accessLogStream }));
+app.use(morgan('[:date[iso]] :method :url :body', { stream: accessLogStream }));
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '/app/index.html'));

@@ -1,16 +1,22 @@
 var fs = require('fs');
 let moment = require('moment');
 
+let hourAgo;
+
 const calculateSum = (url) => {
-    console.log(url);
     const file = fs.readFileSync('access.log', {encoding: 'utf-8'});
     const lines = file.split(/\r?\n/);
-    console.log(lines);
-    lines.forEach( line => {
-        betweenBrackets(line);
-        betweenCurlyBraces(line);
-    })
+    hourAgo = moment.utc().subtract(1, 'hours');
+    const lastHourLogs = lines.filter(lastHourResults);
+    
 };
+
+function lastHourResults(line) {
+    const logDate = betweenBrackets(line);
+    if (moment(logDate).isSameOrAfter(hourAgo)) {
+        return line;
+    }
+}
 
 function betweenCurlyBraces(line) {
     const regex = /\{([^}]+)\}/g;
@@ -24,8 +30,7 @@ function betweenBrackets(line) {
     const regex = /\[([^}]+)\]/g;
     const found = line.match(regex);
     if (found) {
-        const strDate = found[0].substring(1, found[0].length-1);
-        console.log(strDate);
+        return found[0].substring(1, found[0].length-1);
     }
 }
 

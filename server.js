@@ -6,7 +6,7 @@ const {roundValue} = require('./app/services/util');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const api = require('./app/routes/api')(express);
-const app  = express();
+const app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -23,4 +23,4 @@ app.use('/metrics', api);
 
 app.listen(config.port, () => {
     console.log(`listening on port ${config.port}`)
-})
+});

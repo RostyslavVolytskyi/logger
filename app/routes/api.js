@@ -1,6 +1,6 @@
 const {calculateSum} = require('../services/calc-sum');
 
-module.exports = (express) => {
+module.exports = express => {
 
     let api = express.Router();
 
@@ -12,7 +12,6 @@ module.exports = (express) => {
     });
 
     api.post('/*', (req, res) => {
-        const {value} = req.body;
         res.send({});
     })
 

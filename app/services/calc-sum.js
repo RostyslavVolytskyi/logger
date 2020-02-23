@@ -17,7 +17,7 @@ const calculateSum = url => {
         .map(betweenCurlyBraces)
         .filter(Boolean)
         .map(payload => payload.value)
-        .reduce(reducer);
+        .reduce(reducer, 0);
 };
 
 function getKey(line) {

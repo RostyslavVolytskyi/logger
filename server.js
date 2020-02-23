@@ -2,6 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const config = require('./config');
+const {roundValue} = require('./app/services/util');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const api = require('./app/routes/api')(express);
@@ -11,7 +12,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 const accessLogStream = fs.createWriteStream(path.join(__dirname, config.fileName), { flags: 'a' });
-morgan.token('body', (req, res, param) => JSON.stringify(req.body));
+morgan.token('body', (req, res, param) => JSON.stringify(roundValue(req)));
 app.use(morgan('[:date[iso]] :method :url :body', { stream: accessLogStream }));
 
 app.get('/', (req, res) => {

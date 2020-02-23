@@ -10,7 +10,13 @@ const betweenBrackets = line => {
     if (found) return found[0].substring(1, found[0].length-1);
 }
 
+const roundValue = req => {
+    const {value} = req.body;
+    return !isNaN(value) ? {value: Math.round(value)} : {};
+}
+
 module.exports = {
     betweenCurlyBraces,
-    betweenBrackets
+    betweenBrackets,
+    roundValue
 };

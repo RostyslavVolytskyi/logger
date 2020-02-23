@@ -13,12 +13,18 @@ const calculateSum = url => {
     return file
         .split(/\r?\n/)
         .filter(lastHourResults)
-        .filter(log => log.includes(url))
+        .filter(line => getKey(line) === url)
         .map(betweenCurlyBraces)
         .filter(Boolean)
         .map(payload => payload.value)
         .reduce(reducer);
 };
+
+function getKey(line) {
+    return line
+        .split(' ')[2]
+        .split('/')[2];
+}
 
 function lastHourResults(line) {
     const logDate = betweenBrackets(line);

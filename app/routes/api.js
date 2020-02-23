@@ -11,14 +11,9 @@ module.exports = (express) => {
         res.send({value});
     });
 
-    api.get('/*', (req, res) => {
-        const url = req.url;
-        res.send(`get from random ${url}`);
-    });
-
     api.post('/*', (req, res) => {
         const {value} = req.body;
-        res.send({value});
+        res.send({});
     })
 
     return api;

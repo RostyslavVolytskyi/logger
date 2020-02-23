@@ -6,8 +6,10 @@ module.exports = (express) => {
 
     api.get('/*/sum', (req, res) => {
         const url = req.url;
-        calculateSum(url);
-        res.send(`get sum ${url}`);
+        const key = url.split('/')[1];
+        console.log('key ->', key);
+        calculateSum(key);
+        res.send(`key ${key}`);
     });
 
     api.get('/*', (req, res) => {
